@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q-koder</title>
+  <script src="lib/jquery/jquery-2.2.3.min.js"></script>
+
+  <style>
+    html, body {
+      padding: 0;
+      margin: 1em;
+    }
+
+    #question {
+
+    }
+
+    #answer {
+
+    }
+
+    #memorized {
+      display: none;
+    }
+
+  </style>
+
+</head>
+<body onload='next();'>
+
+<div id='application'>
+  <div id='question'>Fråga</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='answer'>Svar</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='memorized'>
+    <button id='correct'>Rätt</button>
+    <span style="padding-left: 1em;"></span>
+    <button id='wrong'>Fel</button>
+  </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+  var data = [
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRK?',
+      answer: 'Vilken uppfattningsbarhet har mina signaler?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRK!',
+      answer: 'Uppfattbarheten hos dina signaler är: 1: Dålig... 5: Utmärkt'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRM?',
+      answer: 'Är min sänding störd?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRM!',
+      answer: 'Störningarna på din sändning är: 1: Obefintliga... 5: Mycket starka'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRN?',
+      answer: 'Besväras du av atmosfäriska störningar?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRN!',
+      answer: 'Atmosfäriska störningar är: 1: Obefintliga... 5: Mycket starka'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRO?',
+      answer: 'Skall jag öka sändareffekten?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRO!',
+      answer: 'Öka sändareffekten!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRP?',
+      answer: 'Skall jag sänka sändareffekten?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRP!',
+      answer: 'Sänk sändareffekt!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRS?',
+      answer: 'Skall jag minska sändningshastigheten? (CW)'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRS!',
+      answer: 'Minska din sändningshastighet (CW)'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRT?',
+      answer: 'Skall jag avbryta sändingen?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRT!',
+      answer: 'Avbryt sändningen!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRV?',
+      answer: 'Är du redo?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRV!',
+      answer: 'Jag är redo!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRX?',
+      answer: 'När anropar du mig igen?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRX!',
+      answer: 'Jag anropar dig igen kl ... på ... Hz!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRZ?',
+      answer: 'Vem anropar mig?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QRZ!',
+      answer: 'Du anropas av ... på ... Hz!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSB?',
+      answer: 'Varierar min signalstyrka?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSB!',
+      answer: 'Din signalstyrka varierar!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSL?',
+      answer: 'Kan du ge mig kvittens?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSL!',
+      answer: 'Jag kvitterar!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSO?',
+      answer: 'Kan du få förbindelse med ...?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSO!',
+      answer: 'Jag kan få förbindelse med ...!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSY?',
+      answer: 'Skall jag gå över till annan frekvens?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QSY!',
+      answer: 'Gå över till annan frekvens!'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QTH?',
+      answer: 'Vilket är ditt geografiska läge?'
+    },
+    {
+      group: 'Q-koder',
+      reversible: true,
+      question: 'QTH!',
+      answer: 'Mitt geografiska läge är ...'
+    }
+  ];
+
+  var failures = data.slice();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].reversible) {
+      failures.push({question: data[i].answer, answer: data[i].question});
+    }
+  }
+
+  var success = [];
+
+  shuffleArray(failures);
+
+  var current = failures.shift();
+
+  $("#correct").on("click", function (event) {
+    event.stopPropagation();
+    success.push(current);
+    next();
+  });
+
+  $("#wrong").on("click", function (event) {
+    event.stopPropagation();
+    failures.push(current);
+    next();
+  });
+
+  $(window).on("click", function (event) {
+    $("#answer").text(current.answer);
+    $("#memorized").show();
+  });
+
+  function next() {
+    if (failures.length == 0) {
+      alert("Nu kan du allt!");
+      return;
+    }
+    current = failures.shift();
+    $("#memorized").hide();
+    $("#answer").text("");
+    $("#question").text(current.question);
+  }
+
+
+  /**
+   * Randomize array element order in-place.
+   * Using Durstenfeld shuffle algorithm.
+   */
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+
+</script>
+
+</html>
