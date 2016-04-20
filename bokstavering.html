@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bokstavering</title>
+  <script src="lib/jquery/jquery-2.2.3.min.js"></script>
+
+  <style>
+    html, body {
+      padding: 0;
+      margin: 1em;
+    }
+
+    #question {
+
+    }
+
+    #answer {
+
+    }
+
+    #memorized {
+      display: none;
+    }
+
+  </style>
+
+</head>
+<body onload='next();'>
+
+<div id='application'>
+  <div id='question'>Fråga</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='answer'>Svar</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='memorized'>
+    <button id='correct'>Rätt</button>
+    <span style="padding-left: 1em;"></span>
+    <button id='wrong'>Fel</button>
+  </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+  var data = [
+    {
+      reversible: false,
+      question: 'A',
+      answer: 'Adam, Alpha'
+    },
+    {
+      reversible: false,
+      question: 'B',
+      answer: 'Bertil, Bravo'
+    },
+    {
+      reversible: false,
+      question: 'C',
+      answer: 'Cesar, Charlie'
+    },
+    {
+      reversible: false,
+      question: 'D',
+      answer: 'David, Delta'
+    },
+    {
+      reversible: false,
+      question: 'E',
+      answer: 'Erik, Echo'
+    },
+    {
+      reversible: false,
+      question: 'F',
+      answer: 'Filip, Foxtrot'
+    },
+    {
+      reversible: false,
+      question: 'G',
+      answer: 'Gustav, Golf'
+    },
+    {
+      reversible: false,
+      question: 'H',
+      answer: 'Helge, Hotel'
+    },
+    {
+      reversible: false,
+      question: 'I',
+      answer: 'Ivar, India'
+    },
+    {
+      reversible: false,
+      question: 'J',
+      answer: 'Johan, Juliet'
+    },
+    {
+      reversible: false,
+      question: 'K',
+      answer: 'Kalle, Kilo'
+    },
+    {
+      reversible: false,
+      question: 'L',
+      answer: 'Ludvig, Lima'
+    },
+    {
+      reversible: false,
+      question: 'M',
+      answer: 'Martin, Mike'
+    },
+    {
+      reversible: false,
+      question: 'N',
+      answer: 'Niklas, November'
+    },
+    {
+      reversible: false,
+      question: 'O',
+      answer: 'Olof, Oscar'
+    },
+    {
+      reversible: false,
+      question: 'P',
+      answer: 'Petter, Papa'
+    },
+    {
+      reversible: false,
+      question: 'Q',
+      answer: 'Qvintus, Quebeck'
+    },
+    {
+      reversible: false,
+      question: 'R',
+      answer: 'Rudolf, Romeo'
+    },
+    {
+      reversible: false,
+      question: 'S',
+      answer: 'Sigurd, Sierra'
+    },
+    {
+      reversible: false,
+      question: 'T',
+      answer: 'Tore, Tango'
+    },
+    {
+      reversible: false,
+      question: 'U',
+      answer: 'Urban, Uniform'
+    },
+    {
+      reversible: false,
+      question: 'V',
+      answer: 'Viktor, Victor'
+    },
+    {
+      reversible: false,
+      question: 'W',
+      answer: 'Wilhelm, Whiskey'
+    },
+    {
+      reversible: false,
+      question: 'X',
+      answer: 'Xerxes, X-ray'
+    },
+    {
+      reversible: false,
+      question: 'Y',
+      answer: 'Yngve, Yankee'
+    },
+    {
+      reversible: false,
+      question: 'Z',
+      answer: 'Zäta, Zulu'
+    },
+    {
+      reversible: false,
+      question: 'Å',
+      answer: 'Åke, Alpha Alpfa'
+    },
+    {
+      reversible: false,
+      question: 'Ä',
+      answer: 'Ärlig, Alpha Echo'
+    },
+    {
+      reversible: false,
+      question: 'Ö',
+      answer: 'Östen, Oscar Echo'
+    }
+  ];
+
+  var failures = data.slice();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].reversible) {
+      failures.push({question: data[i].answer, answer: data[i].question});
+    }
+  }
+
+  var success = [];
+
+  shuffleArray(failures);
+
+  var current = failures.shift();
+
+  $("#correct").on("click", function (event) {
+    event.stopPropagation();
+    success.push(current);
+    next();
+  });
+
+  $("#wrong").on("click", function (event) {
+    event.stopPropagation();
+    failures.push(current);
+    next();
+  });
+
+  $(window).on("click", function (event) {
+    $("#answer").text(current.answer);
+    $("#memorized").show();
+  });
+
+  function next() {
+    if (failures.length == 0) {
+      alert("Nu kan du allt!");
+      return;
+    }
+    current = failures.shift();
+    $("#memorized").hide();
+    $("#answer").text("");
+    $("#question").text(current.question);
+  }
+
+
+  /**
+   * Randomize array element order in-place.
+   * Using Durstenfeld shuffle algorithm.
+   */
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+
+</script>
+
+</html>
