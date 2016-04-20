@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Förkortningar</title>
+  <script src="lib/jquery/jquery-2.2.3.min.js"></script>
+
+  <style>
+    html, body {
+      padding: 0;
+      margin: 1em;
+    }
+
+    #question {
+
+    }
+
+    #answer {
+
+    }
+
+    #memorized {
+      display: none;
+    }
+
+  </style>
+
+</head>
+<body onload='next();'>
+
+<div id='application'>
+  <div id='question'>Fråga</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='answer'>Svar</div>
+  <div style="padding-top: 1em;"></div>
+  <div id='memorized'>
+    <button id='correct'>Rätt</button>
+    <span style="padding-left: 1em;"></span>
+    <button id='wrong'>Fel</button>
+  </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+  var data = [
+    {
+      reversible: true,
+      question: 'BK',
+      answer: 'Break / Bryt, sänds för att avbryta motstationens sändning för kommentar'
+    },
+    {
+      reversible: true,
+      question: 'CQ',
+      answer: 'General call to all stations / Allmänt anrop'
+    },
+    {
+      reversible: true,
+      question: 'CQ',
+      answer: 'Continous wave / Telegrafi'
+    },
+    {
+      reversible: true,
+      question: 'DE',
+      answer: 'From / Från, används vid telegrafi och digitala trafiksätt vid identifiering, mellan motstationens och din egen anropssignal'
+    },
+    {
+      reversible: true,
+      question: 'K',
+      answer: 'Invitation to send / Kom, jag lyssnar'
+    },
+    {
+      reversible: true,
+      question: 'MSG',
+      answer: 'Message / Meddelande'
+    },
+    {
+      reversible: true,
+      question: 'PSE',
+      answer: 'Please / Var snäll och...'
+    },
+    {
+      reversible: true,
+      question: 'R',
+      answer: 'Received / Mottaget'
+    },
+    {
+      reversible: true,
+      question: 'RST',
+      answer: 'Report system, Readability, Signal strength, Tone report / Rapportsystem, läsbaRhet, Signalstyrka, Tonkvalitet'
+    },
+    {
+      reversible: true,
+      question: 'RX',
+      answer: 'Receiver / Radiomottagare'
+    },
+    {
+      reversible: true,
+      question: 'TX',
+      answer: 'Transmitter / Radiosändare'
+    },
+    {
+      reversible: true,
+      question: 'UR',
+      answer: 'Your / Din'
+    },
+    {
+      reversible: true,
+      question: 'UTC',
+      answer: 'Coordinate Universal Time / Koordinerad universiell tid'
+    },
+    {
+      reversible: true,
+      question: 'RTTY',
+      answer: 'Radio Teletype / Fjärrskrift'
+    },
+    {
+      reversible: true,
+      question: 'AMTOR',
+      answer: 'Amateur Teleprinting Over Radio / En speciell form av RTTY-protokollet'
+    },
+    {
+      reversible: true,
+      question: 'PSK',
+      answer: 'Phase Shift Keying / Digital modulationsmetod, en speciell form at RTTY-protokollet, ex PSK31, BPSK31, mfl'
+    },
+    {
+      reversible: true,
+      question: 'AM',
+      answer: 'Amplitude Modulation / Amplitudmodulering'
+    },
+    {
+      reversible: true,
+      question: 'SSB',
+      answer: 'Single sideband / Enkelt sidband'
+    },
+    {
+      reversible: true,
+      question: 'USB',
+      answer: 'Upper Sideband / Övre sidbandet'
+    },
+    {
+      reversible: true,
+      question: 'LSB',
+      answer: 'Lower Sideband / Lägre sidbandet'
+    },
+    {
+      reversible: true,
+      question: 'FM',
+      answer: 'Frequency Modulation / Frekvensmodulering'
+    },
+    {
+      reversible: true,
+      question: 'SSTV',
+      answer: 'Slow Scan Television / Smalbands-TV (bildöverföring)'
+    },
+    {
+      reversible: true,
+      question: 'ATV',
+      answer: 'Amateur Television / Amatörradio-TV'
+    },
+    {
+      reversible: true,
+      question: 'ITU',
+      answer: 'International Telecommuncation Union / Internationella teleunionen'
+    },
+    {
+      reversible: true,
+      question: 'IARU',
+      answer: 'International Amateur Radio Union / Internationella Amatarradiounionen'
+    },
+    {
+      reversible: true,
+      question: 'CEPT',
+      answer: 'European Conference of Postal and Telecommunications Administration / Samarbetsorganisationen av europeiska Post- och Telekommunikationsmyndigheter'
+    },
+    {
+      reversible: true,
+      question: 'PTS',
+      answer: 'Kommunikationsmyndigheten Post- och Telestyrelsen'
+    }
+  ];
+
+  var failures = data.slice();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].reversible) {
+      failures.push({question: data[i].answer, answer: data[i].question});
+    }
+  }
+
+  var success = [];
+
+  shuffleArray(failures);
+
+  var current = failures.shift();
+
+  $("#correct").on("click", function (event) {
+    event.stopPropagation();
+    success.push(current);
+    next();
+  });
+
+  $("#wrong").on("click", function (event) {
+    event.stopPropagation();
+    failures.push(current);
+    next();
+  });
+
+  $(window).on("click", function (event) {
+    $("#answer").text(current.answer);
+    $("#memorized").show();
+  });
+
+  function next() {
+    if (failures.length == 0) {
+      alert("Nu kan du allt!");
+      return;
+    }
+    current = failures.shift();
+    $("#memorized").hide();
+    $("#answer").text("");
+    $("#question").text(current.question);
+  }
+
+
+  /**
+   * Randomize array element order in-place.
+   * Using Durstenfeld shuffle algorithm.
+   */
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+
+</script>
+
+</html>
