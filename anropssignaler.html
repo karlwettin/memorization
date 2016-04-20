@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Förkortningar</title>
+  <title>Anropssignaler</title>
   <script src="lib/jquery/jquery-2.2.3.min.js"></script>
 
   <style>
@@ -48,139 +48,156 @@
   var data = [
     {
       reversible: true,
-      question: 'BK',
-      answer: 'Break / Bryt, sänds för att avbryta motstationens sändning för kommentar'
+      question: 'Distrikt 0',
+      answer: 'Stockholms distrikt'
     },
     {
       reversible: true,
-      question: 'CQ',
-      answer: 'General call to all stations / Allmänt anrop'
+      question: 'Distrikt 1',
+      answer: 'Gotlands distrikt'
     },
     {
       reversible: true,
-      question: 'CW',
-      answer: 'Continous wave / Telegrafi'
+      question: 'Distrikt 2',
+      answer: 'Västerbottens och Norrbottens distrikt'
     },
     {
       reversible: true,
-      question: 'DE',
-      answer: 'From / Från, används vid telegrafi och digitala trafiksätt vid identifiering, mellan motstationens och din egen anropssignal'
+      question: 'Distrikt 3',
+      answer: 'Gävleborg, Västernorrland och Jämtlands distrikt'
     },
     {
       reversible: true,
-      question: 'K',
-      answer: 'Invitation to send / Kom, jag lyssnar'
+      question: 'Distrikt 4',
+      answer: 'Örebros, Värmlands och Dalarnas distrikt'
     },
     {
       reversible: true,
-      question: 'MSG',
-      answer: 'Message / Meddelande'
+      question: 'Distrikt 5',
+      answer: 'Uppsalas, Södermanlands, Östergötlands och Västmanlands distrik'
     },
     {
       reversible: true,
-      question: 'PSE',
-      answer: 'Please / Var snäll och...'
+      question: 'Distrikt 6',
+      answer: 'Hallands och Västra Götalands distrikt'
     },
     {
       reversible: true,
-      question: 'R',
-      answer: 'Received / Mottaget'
+      question: 'Distrikt 7',
+      answer: 'Jönköpings, Kronobergs, Kalmars, Blekinges och Skånes distrikt'
+    },
+
+    {
+      reversible: true,
+      question: 'Prefix SA',
+      answer: 'Svenskt privatpersonsprefix (tilldelat av SSA)'
     },
     {
       reversible: true,
-      question: 'RST',
-      answer: 'Report system, Readability, Signal strength, Tone report / Rapportsystem, läsbaRhet, Signalstyrka, Tonkvalitet'
+      question: 'Prefix SM',
+      answer: 'Svenskt privatpersonsprefix (tilldelat av PTS)'
     },
     {
       reversible: true,
-      question: 'RX',
-      answer: 'Receiver / Radiomottagare'
+      question: 'Prefix SK',
+      answer: 'Svensk radioklubbs prefix (tilldelat av SSA)'
     },
     {
       reversible: true,
-      question: 'TX',
-      answer: 'Transmitter / Radiosändare'
+      question: 'Prefix SA',
+      answer: 'Svensk radioklubbs prefix (tilldelat av PTS)'
     },
     {
       reversible: true,
-      question: 'UR',
-      answer: 'Your / Din'
+      question: 'Prefix SL',
+      answer: 'Svenska försvarsmaktens och Frivilliga Radioorganisationens prefix'
+    },
+
+    {
+      reversible: true,
+      question: 'Prefix LA',
+      answer: 'Norges prefix'
     },
     {
       reversible: true,
-      question: 'UTC',
-      answer: 'Coordinate Universal Time / Koordinerad universiell tid'
+      question: 'Prefix OH',
+      answer: 'Finlands prefix'
     },
     {
       reversible: true,
-      question: 'RTTY',
-      answer: 'Radio Teletype / Fjärrskrift'
+      question: 'Prefix OH0',
+      answer: 'Ålands prefix'
     },
     {
       reversible: true,
-      question: 'AMTOR',
-      answer: 'Amateur Teleprinting Over Radio / En speciell form av RTTY-protokollet'
+      question: 'Prefix OZ',
+      answer: 'Danmarks prefix'
     },
     {
       reversible: true,
-      question: 'PSK',
-      answer: 'Phase Shift Keying / Digital modulationsmetod, en speciell form at RTTY-protokollet, ex PSK31, BPSK31, mfl'
+      question: 'Prefix DL',
+      answer: 'Tysklands prefix'
     },
     {
       reversible: true,
-      question: 'AM',
-      answer: 'Amplitude Modulation / Amplitudmodulering'
+      question: 'Prefix ES',
+      answer: 'Estlands prefix'
     },
     {
       reversible: true,
-      question: 'SSB',
-      answer: 'Single sideband / Enkelt sidband'
+      question: 'Prefix G',
+      answer: 'Storbritanniens prefix'
     },
     {
       reversible: true,
-      question: 'USB',
-      answer: 'Upper Sideband / Övre sidbandet'
+      question: 'Prefix ON',
+      answer: 'Belgiens prefix'
     },
     {
       reversible: true,
-      question: 'LSB',
-      answer: 'Lower Sideband / Lägre sidbandet'
+      question: 'PA',
+      answer: 'Nederländernas prefix'
     },
     {
       reversible: true,
-      question: 'FM',
-      answer: 'Frequency Modulation / Frekvensmodulering'
+      question: 'Prefix SP',
+      answer: 'Polens prefix'
     },
     {
       reversible: true,
-      question: 'SSTV',
-      answer: 'Slow Scan Television / Smalbands-TV (bildöverföring)'
+      question: 'Prefix UA',
+      answer: 'Rysslands prefix'
     },
     {
       reversible: true,
-      question: 'ATV',
-      answer: 'Amateur Television / Amatörradio-TV'
+      question: 'Prefix YL',
+      answer: 'Lettlands prefix'
     },
     {
       reversible: true,
-      question: 'ITU',
-      answer: 'International Telecommuncation Union / Internationella teleunionen'
+      question: 'Prefix K',
+      answer: 'USAs prefix'
     },
     {
       reversible: true,
-      question: 'IARU',
-      answer: 'International Amateur Radio Union / Internationella Amatarradiounionen'
+      question: 'Prefix VE',
+      answer: 'Kanadas prefix'
     },
     {
       reversible: true,
-      question: 'CEPT',
-      answer: 'European Conference of Postal and Telecommunications Administration / Samarbetsorganisationen av europeiska Post- och Telekommunikationsmyndigheter'
+      question: 'Prefix VK',
+      answer: 'Australiens prefix'
     },
     {
       reversible: true,
-      question: 'PTS',
-      answer: 'Kommunikationsmyndigheten Post- och Telestyrelsen'
-    }
+      question: 'Prefix ZL',
+      answer: 'Nya Zeelands prefix'
+    },
+    {
+      reversible: true,
+      question: 'Prefix JA',
+      answer: 'Japans prefix'
+    },
   ];
 
   var failures = data.slice();
